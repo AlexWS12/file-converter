@@ -3,3 +3,4 @@ pillow
 reportlab
 python-docx
 pydub
+streamlit
