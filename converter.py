@@ -17,8 +17,7 @@ def convert_all(root: str, from_ext: str, to_ext: str):
 
                                                                 # loops through all files in the folder (and subfolders) that match the input extension
     for path in root_path.rglob(f"*{from_ext}"):
-    if path.is_file() and path.name != "README.md":             # ensures we don't convert README.md files
-        if path.is_file():                                      # ensures it's a file
+        if path.is_file() and path.name != "README.md":         # ensures we don't convert README.md files
             dst = path.with_suffix(to_ext)                      # creates new path with the target extension
             func(path, dst)                                     # calls the conversion function
             print(f"{path} → {dst}")                            # displays conversion result
