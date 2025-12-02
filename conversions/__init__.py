@@ -18,6 +18,7 @@ from .xml_json import xml_to_json, json_to_xml
 from .xml_csv import xml_to_csv, csv_to_xml
 from .xml_yaml import xml_to_yaml, yaml_to_xml
 from .xml_npy import xml_to_npy, npy_to_xml
+from .audio_wav_mp3 import wav_to_mp3, mp3_to_wav
 
 CONVERSIONS = {
     (".md", ".html"): md_to_html,
@@ -94,4 +95,8 @@ CONVERSIONS = {
     # JSON ↔ TOON (minified JSON)
     (".json", ".toon"): json_to_toon,
     (".toon", ".json"): toon_to_json,
+
+    # WAV ↔ MP3
+    (".wav", ".mp3"): wav_to_mp3,
+    (".mp3", ".wav"): mp3_to_wav,
 }
