@@ -17,6 +17,7 @@ A lightweight Python application for converting between multiple file formats in
   - TXT ↔ PDF
   - TXT ↔ DOCX
   - JSON ↔ TOON
+  - MP3 ↔ WAV
   - And more (soon)
 
 - **Web Interface:** User-friendly Streamlit UI for uploading and converting files
