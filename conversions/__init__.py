@@ -17,7 +17,7 @@ from .html_pdf import html_to_pdf, pdf_to_html
 from .xml_json import xml_to_json, json_to_xml
 from .xml_csv import xml_to_csv, csv_to_xml
 from .xml_yaml import xml_to_yaml, yaml_to_xml
-from .xml_json import xml_to_json, json_to_xml
+from .xml_npy import xml_to_npy, npy_to_xml
 
 CONVERSIONS = {
     (".md", ".html"): md_to_html,
@@ -74,9 +74,10 @@ CONVERSIONS = {
     (".xml", ".yml"): xml_to_yaml,
     (".yaml", ".xml"): yaml_to_xml,
     (".yml", ".xml"): yaml_to_xml,
-    # XML ↔ JSON
-    (".xml", ".json"): xml_to_json,
-    (".json", ".xml"): json_to_xml,
+
+    # XML ↔ NPY
+    (".xml", ".npy"): xml_to_npy,
+    (".npy", ".xml"): npy_to_xml,
 
     # YAML/YML ↔ NPY
     (".yaml", ".npy"): yaml_to_npy,
