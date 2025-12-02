@@ -13,6 +13,7 @@ from .json_yaml import json_to_yaml, yaml_to_json
 from .yaml_npy import yaml_to_npy, npy_to_yaml
 from .yaml_csv import yaml_to_csv, csv_to_yaml
 from .json_toon import json_to_toon, toon_to_json
+from .html_pdf import html_to_pdf, pdf_to_html
 
 CONVERSIONS = {
     (".md", ".html"): md_to_html,
@@ -49,6 +50,9 @@ CONVERSIONS = {
     (".json", ".yml"): json_to_yaml,
 
     # YAML/YML → JSON
+        # HTML ↔ PDF (text-only rendering)
+        (".html", ".pdf"): html_to_pdf,
+        (".pdf", ".html"): pdf_to_html,
     (".yaml", ".json"): yaml_to_json,
     (".yml", ".json"): yaml_to_json,
 

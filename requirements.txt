@@ -6,3 +6,4 @@ pydub
 streamlit
 PyPDF2
 pyyaml
+beautifulsoup4
