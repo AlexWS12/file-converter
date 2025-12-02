@@ -8,6 +8,7 @@ from .image_webp import any_to_webp, webp_to_any
 from .docx_txt import docx_to_txt, txt_to_docx
 from .txt_pdf import txt_to_pdf
 from .pdf_txt import pdf_to_txt
+from .image_png_jpeg import png_to_jpeg, jpeg_to_png
 
 CONVERSIONS = {
     (".md", ".html"): md_to_html,
@@ -32,4 +33,10 @@ CONVERSIONS = {
     (".txt", ".pdf"): txt_to_pdf,
 
     (".pdf", ".txt"): pdf_to_txt,
+
+    # PNG ↔ JPG/JPEG
+    (".png", ".jpg"): png_to_jpeg,
+    (".png", ".jpeg"): png_to_jpeg,
+    (".jpg", ".png"): jpeg_to_png,
+    (".jpeg", ".png"): jpeg_to_png,
 }
