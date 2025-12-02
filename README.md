@@ -11,6 +11,7 @@ A lightweight Python application for converting between multiple file formats in
 - **Supported Conversions:**
   - CSV ↔ JSON ↔ NPY ↔ YAML
   - Markdown ↔ HTML
+  - PDF ↔ HTML
   - Image ↔ WebP
   - PNG ↔ JPEG
   - TXT ↔ PDF
