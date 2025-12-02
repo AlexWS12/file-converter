@@ -4,6 +4,9 @@ from .csv_json import csv_to_json
 from .json_csv import json_to_csv
 from .csv_npy import csv_to_npy
 from .npy_csv import npy_to_csv
+from .image_webp import any_to_webp, webp_to_any
+from .docx_txt import docx_to_txt, txt_to_docx
+from .txt_pdf import txt_to_pdf
 
 CONVERSIONS = {
     (".md", ".html"): md_to_html,
@@ -14,4 +17,19 @@ CONVERSIONS = {
 
     (".csv", ".npy"): csv_to_npy,
     (".npy", ".csv"): npy_to_csv,
+
+    # Images ↔ WEBP
+    (".png", ".webp"): any_to_webp,
+    (".jpg", ".webp"): any_to_webp,
+    (".jpeg", ".webp"): any_to_webp,
+    (".webp", ".png"): webp_to_any,
+    (".webp", ".jpg"): webp_to_any,
+    (".webp", ".jpeg"): webp_to_any,
+
+    # DOCX ↔ TXT
+    (".docx", ".txt"): docx_to_txt,
+    (".txt", ".docx"): txt_to_docx,
+
+    # TXT → PDF
+    (".txt", ".pdf"): txt_to_pdf,
 }

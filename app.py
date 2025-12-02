@@ -5,7 +5,12 @@ from pathlib import Path
 st.title("File Converter Tool")
 
 # Let user choose the type of conversion (from -> to)
-supported_exts = ["md", "html", "csv", "json", "npy"]
+supported_exts = [
+    "md", "html",
+    "csv", "json", "npy",
+    "png", "jpg", "jpeg", "webp",
+    "txt", "docx", "pdf"
+]
 from_ext = st.selectbox("Convert from", supported_exts)
 to_ext = st.selectbox("Convert to", [ext for ext in supported_exts if ext != from_ext])
 
