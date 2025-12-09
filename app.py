@@ -8,6 +8,14 @@ from PIL import Image
 import json
 import yaml
 
+def format_size(bytes):
+    """Convert bytes to human-readable format."""
+    for unit in ['B', 'KB', 'MB', 'GB']:
+        if bytes < 1024:
+            return f"{bytes:.1f} {unit}"
+        bytes /= 1024
+    return f"{bytes:.1f} TB"
+
 def preview_file(uploaded_file, ext):
     """Show preview based on file type."""
     try:
@@ -139,7 +147,13 @@ uploaded_files = st.file_uploader(
 )
 
 if uploaded_files:
-    st.write(f"📤 Uploaded {len(uploaded_files)} file(s):")
+    # Show uploaded files with sizes
+    total_size = sum(f.size for f in uploaded_files)
+    st.write(f"📤 Uploaded {len(uploaded_files)} file(s) • Total size: {format_size(total_size)}")
+    
+    with st.expander("📋 File Details", expanded=False):
+        for f in uploaded_files:
+            st.write(f"• **{f.name}** - {format_size(f.size)}")
     
     # Preview section with tabs
     if len(uploaded_files) == 1:
