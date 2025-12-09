@@ -65,6 +65,59 @@ def preview_file(uploaded_file, ext):
 
 st.title("File Converter Tool 📁")
 
+# Dark mode toggle button
+col1, col2 = st.columns([6, 1])
+with col2:
+    if "dark_mode" not in st.session_state:
+        st.session_state.dark_mode = False
+    
+    if st.button("🌙" if not st.session_state.dark_mode else "☀️"):
+        st.session_state.dark_mode = not st.session_state.dark_mode
+        st.rerun()
+
+# Apply theme with custom CSS
+if st.session_state.dark_mode:
+    st.markdown("""
+    <style>
+        [data-testid="stAppViewContainer"] {
+            background-color: #0e1117;
+        }
+        [data-testid="stHeader"] {
+            background-color: #0e1117;
+        }
+        .stMarkdown, .stText, p, h1, h2, h3, label {
+            color: #fafafa !important;
+        }
+        [data-testid="stFileUploadDropzone"] {
+            background-color: #262730;
+            border-color: #4a4a4a;
+        }
+        .stButton > button {
+            background-color: #262730;
+            color: #fafafa;
+            border: 1px solid #4a4a4a;
+        }
+        .stSelectbox [data-baseweb="select"] {
+            background-color: #262730;
+        }
+        [data-testid="stExpander"] {
+            background-color: #1e1e1e;
+            border: 1px solid #4a4a4a;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+    <style>
+        [data-testid="stAppViewContainer"] {
+            background-color: #ffffff;
+        }
+        [data-testid="stHeader"] {
+            background-color: #ffffff;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Let user choose the type of conversion (from -> to)
 supported_exts = [
     "md", "html",
