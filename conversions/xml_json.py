@@ -12,25 +12,30 @@ def xml_to_json(src: Path, dst: Path) -> None:
 
 
 def json_to_xml(src: Path, dst: Path) -> None:
-    """JSON → XML.
+    """JSON → XML (smart root + proper XML declaration).
 
-    Wraps top-level in <root> if needed. If the JSON is a list,
-    serializes it as <root><item>...</item>...</root>.
+    Rules:
+    - dict with 1 key → use that key as root tag
+    - dict with multiple keys → wrap in <root>
+    - list → <root><item>...</item></root>
+    - scalar → <root><value>...</value></root>
     """
     with open(src, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    if isinstance(data, dict):
-        # If exactly one top-level key, use it as the root element
-        if len(data) == 1:
-            root_name, content = next(iter(data.items()))
-            obj = {root_name: content}
-        else:
-            obj = {"root": data}
+    # Pick the root structure
+    if isinstance(data, dict) and len(data) == 1:
+        # Single key: use it as root
+        root_name, content = next(iter(data.items()))
+        obj = {root_name: content}
+    elif isinstance(data, dict):
+        obj = {"root": data}
     elif isinstance(data, list):
         obj = {"root": {"item": data}}
     else:
         obj = {"root": {"value": data}}
 
-    xml_str = xmltodict.unparse(obj, pretty=True)
+    # Generate XML with declaration
+    xml_body = xmltodict.unparse(obj, pretty=True, full_document=False)
+    xml_str = '<?xml version="1.0" encoding="utf-8"?>\n' + xml_body
     Path(dst).write_text(xml_str, encoding="utf-8")
