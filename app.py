@@ -268,11 +268,15 @@ with tab1:
                 preview_file(uploaded_file, from_ext)
 
     if st.button("Convert All"):
+        import time
+        start_time = time.time()
+        
         upload_dir = Path("uploaded_files")
         upload_dir.mkdir(exist_ok=True)
         
         converted_files = []
         errors = []
+        conversion_times = []
 
         # Progress bar
         progress_bar = st.progress(0)
@@ -289,6 +293,7 @@ with tab1:
         # Convert each file individually
         for i, src_path in enumerate(src_paths):
             try:
+                file_start = time.time()
                 status_text.text(f"Converting {src_path.name}...")
                 
                 # Get conversion function directly
@@ -303,6 +308,8 @@ with tab1:
                 
                 if dst_path.exists():
                     converted_files.append(dst_path)
+                    file_time = time.time() - file_start
+                    conversion_times.append((dst_path.name, file_time))
                 
                 progress_bar.progress((i + 1) / len(src_paths))
 
@@ -312,10 +319,18 @@ with tab1:
                 errors.append(f"{src_path.name}: {str(e)}")
 
         # Show results
-        status_text.text("✅ Conversion complete!")
+        total_time = time.time() - start_time
+        status_text.text(f"✅ Conversion complete in {total_time:.2f}s!")
         
         if converted_files:
             st.success(f"Successfully converted {len(converted_files)} file(s)")
+            
+            # Show conversion times
+            if conversion_times:
+                with st.expander("⏱️ Conversion Times", expanded=False):
+                    for file_name, file_time in conversion_times:
+                        st.write(f"• **{file_name}** - {file_time:.3f}s")
+                    st.write(f"**Total time:** {total_time:.2f}s")
             
             st.subheader("Download Options")
             
